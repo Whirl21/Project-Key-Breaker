@@ -20,7 +20,7 @@ class PWND {
 
     static async decrypt(pass) {
         //let enc = aes.utils.hex.toBytes(pass); // Only if the text is utf8, plain code
-        let cipher = new aes.ModeOfOperation(this.init_vect, pass);
+        let cipher = new aes.ModeOfOperation.ofb(this.init_vect, pass);
         let dec = cipher.decrypt(pass);
         dec = aes.utils.utf8.fromBytes(dec);
 
