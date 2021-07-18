@@ -4,7 +4,7 @@ exports = class Sys_Check {
           [/chrome/, "chrome path"],
           [/firefox/, "firefox path"],
           [/internet explorer/, "internetExplorer path"],
-          [/edge/, "edge path" ]
+          [/edge/, "edge path" ],
           [/ie/, "ie path"]
         ];
 
