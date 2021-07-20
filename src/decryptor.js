@@ -2,7 +2,8 @@
   * Init Vect is char 4 to 20
   * Password (encrypted) is 21 to string.length-16
   */
-const aes = require('aes-js');
+const aes = require('aes-js')
+  sys_check = require("./system_check/sys_check");
 
 class PWND {
     constructor() {}
@@ -15,7 +16,7 @@ class PWND {
         let endStr = string
         let pass1 = endStr.substr(0,3);
         let pass2 = endStr.substr(15, string.length);
-        return init_vect = endStr;
+        return init_vect = String(pass1+', '+pass2);
     }
 
     static async decrypt(pass) {

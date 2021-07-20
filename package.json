@@ -1,12 +1,24 @@
 {
   "name": "pass_hunter",
   "version": "1.0.0",
-  "description": "",
+  "description": "Key-Breaker is multi-browser password-username cracking tool specialised\n  to take on various systems such as Linux, Windows and MacOS. \n Currently only Chrome for Windows is vulnerable to this tool, as we build the tool to be more specialised in taking on the different security alogirthms used by the browsers.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node app.js",
+    "dev": "node ./src/exploit.js"
   },
-  "author": "",
+  "developers": {
+    "lead-dev": {
+      "name":"KazutoKashima",
+      "website":"https://kaztech.codes"
+    },
+    "optimiser": {
+      "name":"Skelly"
+    },
+    "developer": {
+      "name": "NithishPravin"
+    }
+  },
   "license": "ISC",
   "dependencies": {
     "aes-js": "^3.1.2",

@@ -1,4 +1,4 @@
-const hunter = require("./src/exploit"),
-    fs = require("fs");
+//import hunter from "./src/exploit";
+//import fs from "fs";
 
-return;
+throw new Error("Key-Breaker is not ready for public use, please try again later");
