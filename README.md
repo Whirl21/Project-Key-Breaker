@@ -1,4 +1,4 @@
-# Project Key-Breaker, AKA. Pass Hunter (NOT READY FOR USE) 
+# Project Key-Breaker, AKA. Pass Hunter (ALPHA RELEASE) 
 
 ## **DISCLAIMER:**
 > Any damage done from incorrect and/or illegal usage of this software is purely upon the user, as **__THE DEVELOPERS DO NOT CONDONE ANY ILLEGAL USAGE__** of this software in any form, or manner.
