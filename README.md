@@ -1,4 +1,4 @@
-# Project Key-Breaker, AKA. Pass Hunter  
+# Project Key-Breaker, AKA. Pass Hunter (NOT READY FOR USE) 
 
 ## **DISCLAIMER:**
 > Any damage done from incorrect and/or illegal usage of this software is purely upon the user, as **__THE DEVELOPERS DO NOT CONDONE ANY ILLEGAL USAGE__** of this software in any form, or manner.
@@ -28,3 +28,7 @@
 
 ### **What's Next?**
 >   *Key-Breaker* is planned to have an eventual AI implementation that allows recognition of common passwords <br> and will warn users of this threat and advice new passwords for each site that contains duplicate passwords
+
+### Want to get in touch?
+- Join our [guilded](https://www.guilded.gg/kazs-corner/)
+- Or email me: project-red-alice@outlook.com

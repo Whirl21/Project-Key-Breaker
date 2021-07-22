@@ -68,6 +68,8 @@ module.exports = class sys_check {
 			throw Error("Invalid Browser Input");
 		if(!fs.existsSync(p.normalize(foundBrowser[1])))
 			throw Error("Browser Not Found >:3");
+		if (!!fs.existsSync(foundBrowser[1]))
+			return foundBrowser[1];
 	}
 
 	static async linux(browser) {
@@ -77,5 +79,7 @@ module.exports = class sys_check {
 			throw Error("Invalid Browser Input");
 		if(!fs.existsSync(p.normalize(foundBrowser[1])))
 			throw Error("Browser Not Found >:3");
+		if (!!fs.existsSync(foundBrowser[1]))
+			return foundBrowser[1];
 	}
 }
