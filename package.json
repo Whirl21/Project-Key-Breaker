@@ -9,11 +9,11 @@
   },
   "developers": {
     "lead-dev": {
-      "name":"KazutoKashima",
-      "website":"https://kaztech.codes"
+      "name": "KazutoKashima",
+      "website": "https://kaztech.codes"
     },
     "optimiser": {
-      "name":"Skelly"
+      "name": "Skelly"
     },
     "developer": {
       "name": "NithishPravin"
@@ -24,6 +24,6 @@
     "aes-js": "^3.1.2",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^4.2.0"
   }
 }
