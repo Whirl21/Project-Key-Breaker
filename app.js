@@ -1,7 +1,7 @@
 const kb = require("./src/exploit"),
 	args = process.argv.slice(2);
 
-if (args[0] === "win"){ 
+if ((/(win)|(windows)|(nt)/gi).test(args[0])) { 
 	switch (args[1]) {
 		case "chrome":
 			kb.chrome();
@@ -23,4 +23,10 @@ if (args[0] === "win"){
 			kb.chrome();
 			break;
 	}
+} else if ((/(mac)|(macos)/gi).test(args[0])) {
+	console.log("Exploit not ready for MacOS");
+} else if ((/(linux)|(posix)/gi).test(args[0])) { 
+	console.log("Exploit not ready for Linux");
+} else {
+	console.error("Unknown System Type");
 }

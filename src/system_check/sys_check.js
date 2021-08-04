@@ -32,7 +32,7 @@ const win32_browsers = {
 };
 const macos_browsers = {};
 const linux_browsers = {};
-const system = process.env.OS_NAME;
+
 os = process.env.OS_NAME;
 switch (os === null) {
 	case id.darwin() == true:
@@ -48,37 +48,35 @@ switch (os === null) {
 		OS.set("Current OS:", "NT");
 		break;
 }
-class Check {
-	constructor() {
-		// recreate the constructor;
-		throw new SyntaxError("NOT A Constructor")
-	}
 
-	static async win32(browser) {
-		if (!browser) throw new Error("No browser specified");
-		for (let i = browser; i in win32_browsers;) {
-			if (i in win32_browsers == true) return i.path;
-		} 
-		return;
-	}
-
-	static async macos(browser) {
-		if (!browser) throw new Error("No browser specified");
-		
-		if (!!macos_browsers.has(browser)) {let foundBrowser = macos_browsers.browser.path; return foundBrowser;}
-		else return false;
-	}
-
-	/**
-	 * @returns
-	 */
-	static async linux(browser) {
-		if (!browser) throw new Error("No browser specified");
-		
-		if (!!linux_browsers.has(browser)) {let foundBrowser = linux_browsers.browser.path; return foundBrowser;}
-		else return false;
-	}
+function win32(browser) {
+	if (!browser) throw new Error("No browser specified");
+	for (let i = browser; i in win32_browsers;) {
+		if (i in win32_browsers == true) return String(i.path);
+	} 
 }
 
+function macos(browser) {
+	if (!browser) throw new Error("No browser specified");
+	
+	if (!!macos_browsers.has(browser)) {let foundBrowser = macos_browsers.browser.path; return foundBrowser;}
+	else return false;
+}
+
+/**
+ * @returns
+ */
+function linux(browser) {
+	if (!browser) throw new Error("No browser specified");
+	
+	if (!!linux_browsers.has(browser)) {let foundBrowser = linux_browsers.browser.path; return foundBrowser;}
+	else return false;
+}
+
+
 //clmodule.exports = Check;
-module.exports = Object.assign(Check);
+module.exports = {
+	win32: win32,
+	linux: linux,
+	macos: macos
+};
