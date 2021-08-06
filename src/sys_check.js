@@ -18,10 +18,11 @@ const linux_browsers = ['firefox',    'firefox'];
  * @param {String} browser - Windows 7->10 browser to be used, NOTE: only chrome is ready
  */
 function win32(browser) {
+	console.log("Browser Choice: " + browser);
 	if (!browser) throw new Error("No browser specified");
-	if (browser == ("chrome") && win32_browsers.hasOwnProperty(browser)) return String(chrome_win);
-    if (browser == ("firefox") && win32_browsers.hasOwnProperty(browser)) return String(fire_win);
-    else throw new Error("No browser found");
+	if (browser == "chrome") return String(chrome_win);
+    if (browser == "firefox") return String(fire_win);
+    else throw "No browser found";
 }
 
 function macos(browser) {

@@ -18,12 +18,17 @@ class PWND {
         let pass1 = endStr.substr(0,3);
         let pass2 = endStr.substr(15, string.length);
         console.log("Password Vectors:", pass1, pass2);
-        return init_vect = String(pass1+', '+pass2);
+        init_vect = String(pass1+''+pass2);
+        console.log(init_vect)
+        return init_vect;
     }
 
     static async decrypt(pass) {
         //let enc = aes.utils.hex.toBytes(pass); // Only if the text is utf8, plain code
-        let cipher = new aes.ModeOfOperation.ofb(this.init_vect, pass);
+        console.log(pass);
+        pass.split(',').join('');
+        console.log(pass);
+        let cipher = new aes.ModeOfOperation.ofb(pass);
         let dec = cipher.decrypt(pass);
         dec = aes.utils.utf8.fromBytes(dec);
 
