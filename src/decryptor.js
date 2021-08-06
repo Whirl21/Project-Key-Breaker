@@ -14,9 +14,10 @@ class PWND {
       */
     static async fndEnc(string) {
         let init_vect;
-        let endStr = string
+        let endStr = String(string);
         let pass1 = endStr.substr(0,3);
         let pass2 = endStr.substr(15, string.length);
+        console.log("Password Vectors:", pass1, pass2);
         return init_vect = String(pass1+', '+pass2);
     }
 

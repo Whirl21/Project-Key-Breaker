@@ -1,6 +1,6 @@
 const kb = require("./src/exploit"),
 	args = process.argv.slice(2);
-exports = args;
+module.exports = args;
 function x(){ switch (args[1]) {
 	case "chrome":
 		kb.chrome();
