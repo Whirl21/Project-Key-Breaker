@@ -14,25 +14,39 @@ class PWND {
       */
     static async fndEnc(string) {
         let init_vect;
+        function findInit() {
+          let thing = String(string)
+          thing.substr(0,3);
+          init_vect = thing.substr(17, thing.length);
+        }
+        findInit(string);
         let endStr = String(string);
-        let pass1 = endStr.substr(0,3);
-        let pass2 = endStr.substr(15, string.length);
-        console.log("Password Vectors:", pass1, pass2);
-        init_vect = String(pass1+''+pass2);
-        console.log(init_vect)
+        let pass2 = endStr;
+        console.log("Password Encrypted:", pass2);
+        console.log("Initial Vector", init_vect)
         return init_vect;
     }
 
     static async decrypt(pass) {
-        //let enc = aes.utils.hex.toBytes(pass); // Only if the text is utf8, plain code
-        console.log(pass);
-        pass.split(',').join('');
-        console.log(pass);
-        let cipher = new aes.ModeOfOperation.ofb(pass);
-        let dec = cipher.decrypt(pass);
-        dec = aes.utils.utf8.fromBytes(dec);
+        String(pass);
+        // An example 128-bit key (16 bytes * 8 bits/byte = 128 bits)
+        var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
 
-        return dec;
+        // Convert text to bytes
+        var text = pass.toString("utf-8");
+        console.log(text)
+        // When ready to decrypt the hex string, convert it to bytes
+        var encryptedBytes = aes.utils.hex.toBytes(text);
+
+        // The counter mode of operation maintains internal state, so to
+        // decrypt a new instance must be instantiated.
+        var aesCtr = new aes.ModeOfOperation.ctr(key, new aes.Counter(5));
+        var decryptedBytes = aesCtr.decrypt(encryptedBytes);
+
+        // Convert our bytes back into text
+        var decryptedText = aes.utils.utf8.fromBytes(decryptedBytes);
+
+        return console.log("Decrypted password: ", decryptedText);
     }
 
     static async hardspread() {
