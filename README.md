@@ -2,6 +2,7 @@
 
 ## **DISCLAIMER:**
 > Any damage done from incorrect and/or illegal usage of this software is purely upon the user, as **__THE DEVELOPERS DO NOT CONDONE ANY ILLEGAL USAGE__** of this software in any form, or manner.
+> Further note that bleach is under a security threat with XSS, so please find an alternative!
 <br>
 
 ### **What is it?**
