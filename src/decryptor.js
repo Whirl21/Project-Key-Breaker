@@ -27,10 +27,10 @@ class PWND {
         return init_vect;
     }
 
-    static async decrypt(pass) {
+    static async decrypt(pass, master_key) {
         String(pass);
         // An example 128-bit key (16 bytes * 8 bits/byte = 128 bits)
-        var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19, 20,21,22,23,24 ];
+        var key = master_key;
 
         var result = [];
         for (let r = 3; r < pass.length && 15 !== r; r++) result.push(array[r]);
@@ -41,9 +41,8 @@ class PWND {
 
         // FIND A WAY TO GENERATE THE KEY/CIPHER
         /**
-         * base64.b64decode(path['os_crypt']['encrypted_key'])
+         * base64.b64decode(master_key])
          */
-        let Cipher = null;
 
         // Convert text to bytes
         var text = pass.toString("utf-8");
@@ -53,7 +52,7 @@ class PWND {
 
         // The counter mode of operation maintains internal state, so to
         // decrypt a new instance must be instantiated.
-        var aesCtr = new aes.ModeOfOperation.ofb(Cipher, init_vect);
+        var aesCtr = new aes.ModeOfOperation.ofb(key, init_vect);
         var decryptedBytes = aesCtr.decrypt(encryptedBytes);
 
         // Convert our bytes back into text
