@@ -24,6 +24,7 @@
   "dependencies": {
     "aes-js": "^3.1.2",
     "bleach": "^0.3.0",
+    "crypto": "^1.0.1",
     "fs": "^0.0.1-security",
     "fs-extra": "^10.0.0",
     "jinja": "^0.13.4",

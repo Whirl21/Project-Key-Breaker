@@ -7,7 +7,8 @@ const { copySync } = require('fs-extra');
 const { dirname } = require('path');
   sys_check = require("./sys_check"),
   fs = require("fs"),
-  path = require("path");
+  path = require("path"),
+  crypto = require("crypto");
 
 class PWND {
     constructor() {}
