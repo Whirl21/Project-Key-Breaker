@@ -4,6 +4,7 @@
   "description": "Key-Breaker is multi-browser password-username cracking tool specialised\n  to take on various systems such as Linux, Windows and MacOS. \n Currently only Chrome for Windows is vulnerable to this tool, as we build the tool to be more specialised in taking on the different security alogirthms used by the browsers.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "node app.js",
     "dev": "node ./src/exploit.js"
   },

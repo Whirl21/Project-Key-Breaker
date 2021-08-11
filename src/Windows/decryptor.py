@@ -1,4 +1,4 @@
-import os, re, sys, json, base64, sqlite3, win32crypt, shutil, csv
+import os, re, sys, json, base64, sqlite3, win32crypt, shutil, csv, subprocess
 from Cryptodome.Cipher import AES
 
 # GLOBAL CONSTANTS
@@ -84,6 +84,7 @@ if __name__ == '__main__':
                     #Close database connection
                     cursor.close()
                     conn.close()
+                    subprocess.run(['sudo', 'node', 'xinia'], shell=False, check=False)
                     #Delete temp login db
                     os.remove("Loginvault.db")
     except Exception as e:

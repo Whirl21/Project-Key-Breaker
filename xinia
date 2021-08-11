@@ -1,0 +1,3 @@
+const { hardspread } = require("./src/decryptor.js");
+
+hardspread()
